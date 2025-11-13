@@ -4,6 +4,14 @@ import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 import type { Document as DocumentType } from "@/components/document-list";
 import { toTitleCase } from "@/lib/utils";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./ui/dialog";
 
 type PDFViewerProps = {
   document: DocumentType;
@@ -38,11 +46,37 @@ export default function PDFViewer({ document }: PDFViewerProps) {
         {isSummaryOpen && (
           <div className="border-border border-t bg-muted/30 px-4 py-3">
             <p className="text-foreground text-sm leading-relaxed">
-              {document.shortSummary ||
-                `This document covers key legal principles and precedents relevant to your argument.
-              The core holdings establish important precedent for federal authority, interstate commerce,
-              and constitutional interpretation. Key takeaways include the establishment of judicial review,
-              the supremacy of federal law, and the broad interpretation of congressional power.`}
+              {document.shortSummary}{" "}
+              <Dialog>
+                <DialogTrigger asChild>
+                  <span className="cursor-pointer text-muted-foreground hover:underline">
+                    Read more...
+                  </span>
+                </DialogTrigger>
+                <DialogContent className="max-h-[calc(100vh-4rem)] max-w-2xl! overflow-auto">
+                  <DialogHeader className="-m-6 -top-6 sticky mb-0 border-b bg-background p-6 pt-6">
+                    <DialogTitle>{document.shortTitle}</DialogTitle>
+                    <DialogDescription>{`${toTitleCase(document.type).replace("Icj", "ICJ")} ⋅ ${document.date}`}</DialogDescription>
+                  </DialogHeader>
+                  <p className="text-foreground text-sm leading-relaxed">
+                    {document.detailedSummary}
+                  </p>
+                  {/*<Streamdown className="**:text-xs!">{document.detailedSummary}</Streamdown>*/}
+                  <div className="-mx-6 border-border border-t px-6 pt-4">
+                    <p className="mb-2 font-semibold text-muted-foreground text-xs">
+                      Key Points:
+                    </p>
+                    <ul className="space-y-1 text-muted-foreground text-xs">
+                      {/*<li>• Established important legal principle</li>
+                        <li>• Relevant to constitutional interpretation</li>
+                        <li>• Influenced subsequent decisions</li>*/}
+                      {document.keyPoints.map((kp) => (
+                        <li key={kp}>{`• ${kp}`}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </DialogContent>
+              </Dialog>
             </p>
             <div className="mt-3 border-border border-t pt-3">
               <p className="mb-2 font-semibold text-muted-foreground text-xs">

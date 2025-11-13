@@ -30,7 +30,7 @@ export default function ChatSidebar({ documentId }: ChatSidebarProps) {
     setInput("");
   }
 
-  console.log(messages)
+  console.log(messages);
 
   return (
     <div className="flex h-full flex-col">
