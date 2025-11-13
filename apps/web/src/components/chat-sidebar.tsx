@@ -78,7 +78,7 @@ export default function ChatSidebar({ documentId }: ChatSidebarProps) {
 
         {/* Input */}
         <div className="absolute inset-x-0 bottom-0 p-4">
-          <InputGroup className="bg-background">
+          <InputGroup className="bg-background dark:bg-neutral-800">
             <InputGroupTextarea
               disabled={status !== "ready"}
               onChange={(e) => setInput(e.target.value)}
