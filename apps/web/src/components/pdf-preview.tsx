@@ -2,17 +2,41 @@
 
 import { useQuery } from "@tanstack/react-query";
 import type { PDFDocumentProxy } from "pdfjs-dist";
-import { Document, Page, pdfjs } from "react-pdf";
+import { useEffect, useState } from "react";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
-import { useState } from "react";
 
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  "pdfjs-dist/build/pdf.worker.min.mjs",
-  import.meta.url
-).toString();
+// Dynamic imports to avoid server-side rendering issues
+let Document: any = null;
+let Page: any = null;
+let pdfjs: any = null;
+
+const loadPDFJS = async () => {
+  if (typeof window === "undefined") return;
+
+  const {
+    Document: Doc,
+    Page: Pg,
+    pdfjs: pdfjsLib,
+  } = await import("react-pdf");
+
+  Document = Doc;
+  Page = Pg;
+  pdfjs = pdfjsLib;
+
+  pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+    "pdfjs-dist/build/pdf.worker.min.mjs",
+    import.meta.url
+  ).toString();
+};
 
 export function PDFPreview({ filename }: { filename: string }) {
+  const [isPDFJSLoaded, setIsPDFJSLoaded] = useState(false);
+
+  useEffect(() => {
+    loadPDFJS().then(() => setIsPDFJSLoaded(true));
+  }, []);
+
   const { data } = useQuery({
     queryFn: async () => {
       const res = await fetch(`/documents/${filename}`);
@@ -30,6 +54,11 @@ export function PDFPreview({ filename }: { filename: string }) {
   const [numPages, setNumPages] = useState(0);
 
   console.log(data);
+
+  if (!isPDFJSLoaded || !Document || !Page) {
+    return <div>Loading PDF viewer...</div>;
+  }
+
   if (data) {
     return (
       <div className="relative size-full">

@@ -115,6 +115,8 @@ export default function DocumentList({
               ...doc,
               score: 0,
               content: [{ type: "text", text: doc.shortSummary }],
+              file_id: "",
+              attributes: {},
             }}
             fullscreen={fullscreen}
             key={doc.filename}
