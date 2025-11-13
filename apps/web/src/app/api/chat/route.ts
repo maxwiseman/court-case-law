@@ -41,7 +41,7 @@ export async function POST(req: Request) {
         vectorStoreIds: [process.env.OPENAI_VECTOR_STORE ?? ""],
       }),
     },
-    system: "Respond in 1-5 sentences",
+    system: "Try to respond in 1-5 sentences. Use markdown for formatting.",
     messages: selectedDocumentContext ? [caseAtBarContext, selectedDocumentContext, ...convertToModelMessages(messages)] : [caseAtBarContext, ...convertToModelMessages(messages)],
   });
 
