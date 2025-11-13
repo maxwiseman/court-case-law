@@ -57,8 +57,8 @@ export default function ChatSidebar({ documentId }: ChatSidebarProps) {
               >
                 {message.parts
                   .filter((p) => p.type === "text")
-                  .map((part) => (
-                    <Streamdown>{part.text}</Streamdown>
+                  .map((part, i) => (
+                    <Streamdown key={i}>{part.text}</Streamdown>
                   ))}
               </div>
             </div>
