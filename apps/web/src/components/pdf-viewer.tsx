@@ -1,12 +1,9 @@
 "use client";
 
 import { ChevronDown } from "lucide-react";
-import dynamic from "next/dynamic";
 import { useState } from "react";
 import type { Document as DocumentType } from "@/components/document-list";
-import { PDFPreview as staticPDFPreview } from "./pdf-preview";
-
-const PDFPreview = dynamic(async () => staticPDFPreview, { ssr: false });
+import { toTitleCase } from "@/lib/utils";
 
 type PDFViewerProps = {
   document: DocumentType;
@@ -18,10 +15,10 @@ export default function PDFViewer({ document }: PDFViewerProps) {
   return (
     <div className="flex h-full flex-col">
       {/* Document Header */}
-      <div className="h-[85px] border-border border-b bg-card p-4">
+      <div className="min-h-[85px] border-border border-b bg-card p-4">
         <h2 className="font-bold text-xl">{document.shortTitle}</h2>
         <p className="mt-1 text-muted-foreground text-sm">
-          {/*{document.citation}*/}
+          {`${toTitleCase(document.type).replace("Icj", "ICJ")} ⋅ ${document.date}`}
         </p>
       </div>
 

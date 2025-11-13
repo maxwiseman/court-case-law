@@ -58,15 +58,15 @@ function DocumentItem({ doc, fullscreen }: DocumentItemProps) {
       <div className="flex items-start gap-3">
         <Icon className="mt-0.5 h-5 w-5 shrink-0" />
         <div className="min-w-0 flex-1">
-          <p className="font-semibold text-sm">{doc.shortTitle}</p>
-          <p
+          <p className="font-semibold text-sm mb-1">{doc.shortTitle}{" "}<span className="text-muted-foreground font-normal text-xs">{ doc.date}</span></p>
+          {/*<p
             className={cn(
               "mb-1 text-xs",
               fullscreen ? "text-muted-foreground" : "opacity-75"
             )}
           >
-            {/*{doc.citation}*/}
-          </p>
+            {doc.date}
+          </p>*/}
           <p
             className={cn(
               "line-clamp-2 text-xs",

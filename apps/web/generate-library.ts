@@ -14,7 +14,7 @@ const resultPromises = files.map(async (filename) => {
       openai: { strictJsonSchema: true, reasoningEffort: "low", verbosity: "low" },
     },
     system:
-      `Summarize ${filename.replace(".pdf", "")}, in relation to the case at bar (Ecuador v Mexico), in the perscribed JSON format. Your summary should explain how the given case could be used to argue the case at bar. The short title should just be the name of the court case or the document. Use title case for this and don't include dates here unless it's part of the title (ex. \"War of 1812\" should obviously still have the year). The date field should be provided in US format and can be a range (or just a year) where applicable. The short summary should be just 1-2 sentences, and key points should be bullet points (about 3-5, don't include the bullet point character).`,
+      `Summarize ${filename.replace(".pdf", "")}, in relation to the case at bar (Ecuador v Mexico), in the perscribed JSON format. Your summary should explain how the given case could be used to argue the case at bar. The short title should just be the name of the court case or the document. Use title case for this and don't include dates here unless it's part of the title (ex. \"War of 1812\" should obviously still have the year). The date field should be provided as just years and can be a range where applicable. The short summary should be just 1-2 sentences, and key points should be bullet points (about 3-5, don't include the bullet point character).`,
     messages: [
       {
         role: "user",
