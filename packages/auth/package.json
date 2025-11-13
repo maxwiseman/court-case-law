@@ -1,0 +1,30 @@
+{
+  "name": "@court-case-law/auth",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "types": "./dist/*.d.ts",
+      "default": "./src/*.ts"
+    }
+  },
+  "type": "module",
+  "scripts": {
+    "build": "tsdown"
+  },
+  "devDependencies": {
+    "tsdown": "catalog:",
+    "@court-case-law/config": "workspace:*"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "better-auth": "catalog:",
+    "dotenv": "catalog:",
+    "zod": "catalog:",
+    "@court-case-law/db": "workspace:*"
+  }
+}
