@@ -100,7 +100,7 @@ export default function ChatPage() {
             <div className="mx-auto w-full max-w-2xl">
               <PromptInputProvider>
                 <PromptInput
-                  className="pointer-events-auto mx-auto mb-4 w-full overflow-clip"
+                  className="pointer-events-auto mx-auto mb-4 w-full"
                   globalDrop
                   multiple
                   onSubmit={handleSubmit}
