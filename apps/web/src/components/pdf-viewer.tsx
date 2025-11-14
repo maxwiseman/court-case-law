@@ -34,7 +34,7 @@ export default function PDFViewer({ document }: PDFViewerProps) {
       {/* Summary Section */}
       <div className="border-border border-b">
         <button
-          className="flex w-full items-center justify-between px-4 py-3 transition-colors hover:bg-accent"
+          className="flex w-full items-center justify-between bg-muted/30 px-4 py-3 transition-colors hover:bg-accent/50"
           onClick={() => setIsSummaryOpen(!isSummaryOpen)}
           type="button"
         >
