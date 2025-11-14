@@ -80,7 +80,7 @@ export default function ChatSidebar({ documentId }: ChatSidebarProps) {
 
         {/* Input */}
         <div className="absolute inset-x-0 bottom-0 p-4">
-          <InputGroup className="bg-background dark:bg-neutral-800">
+          <InputGroup className="rounded-xl rounded-b-3xl bg-background dark:bg-neutral-800">
             <InputGroupTextarea
               disabled={status !== "ready"}
               onChange={(e) => setInput(e.target.value)}
@@ -95,7 +95,7 @@ export default function ChatSidebar({ documentId }: ChatSidebarProps) {
               placeholder="Ask a question..."
               value={input}
             />
-            <InputGroupAddon align="block-end">
+            <InputGroupAddon align="block-end" className="px-2 pb-2">
               <InputGroupButton
                 className="rounded-full"
                 size="icon-sm"

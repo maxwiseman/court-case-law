@@ -4,16 +4,19 @@ import { ArrowLeft, Search, X } from "lucide-react";
 import Link from "next/link";
 import { useQueryState } from "nuqs";
 import { useState } from "react";
+import { useStore } from "zustand";
 import documentLibrary from "@/../library.json";
 import ChatSidebar from "@/components/chat-sidebar";
 import DocumentList from "@/components/document-list";
 import PDFViewer from "@/components/pdf-viewer";
+import { recentSearchStore } from "@/lib/recent-search-store";
 import { Button } from "./ui/button";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "./ui/input-group";
 
 export function SearchPage() {
   const [query, setQuery] = useQueryState("q", { defaultValue: "" });
   const [inputValue, setInputValue] = useState(query);
+  const addQuery = useStore(recentSearchStore, (i) => i.addQuery);
   const [selectedDocumentId, setSelectedDocumentId] =
     useQueryState("selectedDoc");
   const selectedDocument = documentLibrary.find(
@@ -25,6 +28,7 @@ export function SearchPage() {
       return;
     }
     setQuery(inputValue);
+    if (inputValue.trim().length > 5) addQuery(inputValue);
   };
 
   return (

@@ -1,23 +1,24 @@
 "use client";
 
 import { MessageSquare, Search } from "lucide-react";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { useState } from "react";
+import { useStore } from "zustand";
+import { recentSearchStore } from "@/lib/recent-search-store";
 import { Button } from "./ui/button";
 
-type LandingPageProps = {
-  onStartSearch: () => void;
-};
-
-export function LandingPage({ onStartSearch }: LandingPageProps) {
-  const [mode, setMode] = useState("search"); // "search" or "ask"
+export function LandingPage() {
+  const [mode, setMode] = useState<"search" | "ask">("search"); // "search" or "ask"
   const [input, setInput] = useState("");
+  const { recentQueries, addQuery } = useStore(recentSearchStore);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // if (input.trim() && mode === "search") {
     //   onStartSearch(input);
     // }
+    if (input.trim().length > 5) addQuery(input);
     redirect(`/search?q=${input}`);
     // "Ask" mode will be handled later
   };
@@ -49,7 +50,8 @@ export function LandingPage({ onStartSearch }: LandingPageProps) {
               Search
             </Button>
             <Button
-              className="h-auto flex-1 py-3 text-base"
+              className="h-auto flex-1 cursor-not-allowed py-3 text-base"
+              disabled
               onClick={() => setMode("ask")}
               type="button"
               variant={mode === "ask" ? "default" : "secondary"}
@@ -89,20 +91,18 @@ export function LandingPage({ onStartSearch }: LandingPageProps) {
             Recent Searches
           </p>
           <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
-            {[
-              "Marbury v. Madison",
-              "UN Charter Article 51",
-              "Geneva Convention IV",
-            ].map((item) => (
+            {recentQueries.slice(0,3).map((item) => (
               <Button
                 // className="rounded-lg bg-muted/50 px-4 py-3 text-left text-foreground text-sm transition-colors hover:bg-muted"
+                asChild
                 className="h-auto justify-start border py-3 shadow-none"
                 key={item}
-                onClick={() => onStartSearch()}
                 type="button"
                 variant="secondary"
               >
-                {item}
+                <Link href={`/search?q=${item.replaceAll(" ", "+")}`}>
+                  {item}
+                </Link>
               </Button>
             ))}
           </div>
