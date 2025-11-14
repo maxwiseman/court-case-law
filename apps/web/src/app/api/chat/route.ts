@@ -54,6 +54,7 @@ export async function POST(req: Request) {
           scoreThreshold: 0.5,
         },
       }),
+      web_search: openai.tools.webSearch(),
     },
     system: "Try to respond in 1-5 sentences. Use markdown for formatting.",
     messages: selectedDocumentContext
