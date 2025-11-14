@@ -12,6 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
+import { Streamdown } from "streamdown";
 
 type PDFViewerProps = {
   document: DocumentType;
@@ -58,10 +59,10 @@ export default function PDFViewer({ document }: PDFViewerProps) {
                     <DialogTitle>{document.shortTitle}</DialogTitle>
                     <DialogDescription>{`${toTitleCase(document.type).replace("Icj", "ICJ")} ⋅ ${document.date}`}</DialogDescription>
                   </DialogHeader>
-                  <p className="text-foreground text-sm leading-relaxed">
+                  {/*<p className="text-foreground text-sm leading-relaxed">
                     {document.detailedSummary}
-                  </p>
-                  {/*<Streamdown className="**:text-xs!">{document.detailedSummary}</Streamdown>*/}
+                  </p>*/}
+                  <Streamdown>{document.detailedSummary}</Streamdown>
                   <div className="-mx-6 border-border border-t px-6 pt-4">
                     <p className="mb-2 font-semibold text-muted-foreground text-xs">
                       Key Points:
