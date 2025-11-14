@@ -4,6 +4,8 @@ import { useChat } from "@ai-sdk-tools/store";
 import { ArrowUpIcon, PlusIcon } from "lucide-react";
 import { useState } from "react";
 import { Streamdown } from "streamdown";
+import { StatusMessage } from "./chat/status-message";
+import { Card, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import {
   InputGroup,
   InputGroupAddon,
@@ -11,18 +13,12 @@ import {
   InputGroupTextarea,
 } from "./ui/input-group";
 
-type ChatMessage = {
-  id: string;
-  role: "user" | "assistant";
-  content: string;
-};
-
 type ChatSidebarProps = {
   documentId: string;
 };
 
 export default function ChatSidebar({ documentId }: ChatSidebarProps) {
-  const { messages, status, sendMessage } = useChat();
+  const { messages, status, sendMessage, error } = useChat();
   const [input, setInput] = useState("");
 
   function handleSubmit() {
@@ -63,18 +59,22 @@ export default function ChatSidebar({ documentId }: ChatSidebarProps) {
                     <Streamdown key={i}>{part.text}</Streamdown>
                   ))}
               </div>
+              <StatusMessage parts={message.parts} />
             </div>
           ))}
-          {status === "streaming" && (
-            <div className="flex justify-start">
-              <div className="rounded-lg bg-muted p-3 text-foreground text-sm">
-                <div className="flex gap-1">
-                  <div className="h-2 w-2 animate-bounce rounded-full bg-muted-foreground" />
-                  <div className="h-2 w-2 animate-bounce rounded-full bg-muted-foreground delay-100" />
-                  <div className="h-2 w-2 animate-bounce rounded-full bg-muted-foreground delay-200" />
-                </div>
-              </div>
-            </div>
+          {status === "error" && (
+            <Card>
+              <CardHeader>
+                <CardTitle>
+                  {error?.name ?? "An unknown error occurred"}
+                </CardTitle>
+                <CardDescription>
+                  {error?.message}
+                  <br />
+                  {error?.cause as string | undefined}
+                </CardDescription>
+              </CardHeader>
+            </Card>
           )}
         </div>
 

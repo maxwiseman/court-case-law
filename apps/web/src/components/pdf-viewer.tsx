@@ -2,6 +2,7 @@
 
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
+import { Streamdown } from "streamdown";
 import type { Document as DocumentType } from "@/components/document-list";
 import { toTitleCase } from "@/lib/utils";
 import {
@@ -12,7 +13,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
-import { Streamdown } from "streamdown";
 
 type PDFViewerProps = {
   document: DocumentType;

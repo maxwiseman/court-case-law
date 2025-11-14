@@ -28,7 +28,9 @@ export function SearchPage() {
       return;
     }
     setQuery(inputValue);
-    if (inputValue.trim().length > 5) addQuery(inputValue);
+    if (inputValue.trim().length > 5) {
+      addQuery(inputValue);
+    }
   };
 
   return (

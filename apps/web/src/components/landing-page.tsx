@@ -18,9 +18,14 @@ export function LandingPage() {
     // if (input.trim() && mode === "search") {
     //   onStartSearch(input);
     // }
-    if (input.trim().length > 5) addQuery(input);
-    redirect(`/search?q=${input}`);
-    // "Ask" mode will be handled later
+    if (mode === "search") {
+      if (input.trim().length > 5) {
+        addQuery(input);
+      }
+      redirect(`/search?q=${input.replaceAll(/\s/g, "+")}`);
+    } else if (mode === "ask") {
+      redirect(`/ask?q=${input.replaceAll(/\s/g, "+")}`);
+    }
   };
 
   return (
@@ -50,8 +55,8 @@ export function LandingPage() {
               Search
             </Button>
             <Button
-              className="h-auto flex-1 cursor-not-allowed py-3 text-base"
-              disabled
+              className="h-auto flex-1 py-3 text-base"
+              // disabled
               onClick={() => setMode("ask")}
               type="button"
               variant={mode === "ask" ? "default" : "secondary"}
@@ -82,6 +87,15 @@ export function LandingPage() {
                 <Search className="h-6 w-6" />
               </button>
             )}
+          </div>
+
+          <div className="flex w-full justify-center">
+            <Link
+              className="text-muted-foreground text-sm hover:underline"
+              href={"/search?q="}
+            >
+              View all documents
+            </Link>
           </div>
         </form>
 
