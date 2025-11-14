@@ -5,6 +5,8 @@
 import { AIDevtools } from "@ai-sdk-tools/devtools";
 import type { UIDataTypes, UIMessage, UITools } from "ai";
 import { useChat } from "ai-sdk-tools";
+import { X } from "lucide-react";
+import Link from "next/link";
 import { useQueryState } from "nuqs";
 import { useEffect } from "react";
 import {
@@ -34,6 +36,7 @@ import {
   PromptInputTools,
 } from "@/components/ai-elements/prompt-input";
 import { StatusMessage } from "@/components/chat/status-message";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardDescription,
@@ -80,6 +83,16 @@ export default function ChatPage() {
   return (
     <div className="relative flex size-full justify-center">
       {process.env.NODE_ENV === "development" && <AIDevtools />}
+      <Button
+        asChild
+        className="fixed top-4 left-4 z-10"
+        size="icon-lg"
+        variant="outline"
+      >
+        <Link href="/">
+          <X className="size-5" />
+        </Link>
+      </Button>
 
       <Conversation>
         <div className="pointer-events-none absolute inset-0 z-10 flex h-full w-full flex-col justify-end">
