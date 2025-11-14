@@ -47,8 +47,12 @@ export async function POST(req: Request) {
       },
     },
     tools: {
-      fileSearch: openai.tools.fileSearch({
+      file_search: openai.tools.fileSearch({
         vectorStoreIds: [process.env.OPENAI_VECTOR_STORE ?? ""],
+        ranking: {
+          ranker: "auto",
+          scoreThreshold: 0.5,
+        },
       }),
     },
     system: "Try to respond in 1-5 sentences. Use markdown for formatting.",

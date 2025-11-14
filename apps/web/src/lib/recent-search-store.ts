@@ -14,7 +14,9 @@ export const recentSearchStore = createStore<RecentSearchStore>()(
     (set) => ({
       recentQueries: [],
       addQuery: (newQuery) =>
-        set((prev) => ({ recentQueries: [newQuery, ...prev.recentQueries.slice(0,8)] })),
+        set((prev) => ({
+          recentQueries: [newQuery, ...prev.recentQueries.slice(0, 8)],
+        })),
     }),
     { name: "recent-search-storage" }
   )

@@ -91,7 +91,7 @@ export function LandingPage() {
             Recent Searches
           </p>
           <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
-            {recentQueries.slice(0,3).map((item) => (
+            {recentQueries.slice(0, 3).map((item) => (
               <Button
                 // className="rounded-lg bg-muted/50 px-4 py-3 text-left text-foreground text-sm transition-colors hover:bg-muted"
                 asChild

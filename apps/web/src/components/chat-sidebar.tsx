@@ -44,7 +44,7 @@ export default function ChatSidebar({ documentId }: ChatSidebarProps) {
 
       {/* Messages */}
       <div className="relative size-full flex-1">
-        <div className="absolute inset-0 bottom-4 space-y-3 overflow-y-auto p-4 pb-48">
+        <div className="absolute inset-0 bottom-8 space-y-3 overflow-y-auto p-4 pb-48">
           {messages.map((message) => (
             <div
               className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
