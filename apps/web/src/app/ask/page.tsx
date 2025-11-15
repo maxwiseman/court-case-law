@@ -123,7 +123,6 @@ export default function ChatPage() {
                           <PromptInputActionAddAttachments />
                         </PromptInputActionMenuContent>
                       </PromptInputActionMenu>
-                      {/*<PromptInputSpeechButton />*/}
                     </PromptInputTools>
                     <PromptInputSubmit
                       className="rounded-full"

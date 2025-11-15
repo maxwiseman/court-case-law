@@ -8,7 +8,9 @@ const files = (await readdir("./public/documents")).filter(
 );
 const caseFile = await readFile("./public/documents/Ecuador v Mexico.pdf");
 
+// biome-ignore lint/nursery/noShadow: This is kinda intentional
 async function processInChunks(files: string[], chunkSize: number) {
+  // biome-ignore lint/suspicious/noEvolvingTypes: It's a complicated type and idc
   const results = [];
   for (let i = 0; i < files.length; i += chunkSize) {
     const chunk = files.slice(i, i + chunkSize);

@@ -1,4 +1,4 @@
-/** biome-ignore-all lint/performance/noImgElement: <explanation> */
+/** biome-ignore-all lint/performance/noImgElement: It's expensive */
 "use client";
 
 import { ChevronDownIcon, PaperclipIcon } from "lucide-react";
@@ -76,7 +76,7 @@ export const QueueItemContent = ({
 }: QueueItemContentProps) => (
   <span
     className={cn(
-      "line-clamp-1 grow break-words",
+      "wrap-break-word line-clamp-1 grow",
       completed
         ? "text-muted-foreground/50 line-through"
         : "text-muted-foreground",

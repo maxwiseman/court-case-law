@@ -56,6 +56,7 @@ export default function ChatSidebar({ documentId }: ChatSidebarProps) {
                 {message.parts
                   .filter((p) => p.type === "text")
                   .map((part, i) => (
+                    // biome-ignore lint/suspicious/noArrayIndexKey: We don't have anything better
                     <Streamdown key={i}>{part.text}</Streamdown>
                   ))}
               </div>
